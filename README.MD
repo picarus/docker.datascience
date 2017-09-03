@@ -1,22 +1,25 @@
-# Kuwaderno
-Docker image containing the following **Data Science** notebooks Jupyter, RStudio and Apache Zeppelin. This also contains  Apache Spark and Apache Mesos for Spark job submission locally or on a Mesos cluster.
+# Docker Data Science
+Docker image containing the following **Data Science** notebooks Jupyter, RStudio and Apache Zeppelin. 
+This docker image is a simplification of **KUWADERNO** by Paul Ganzon, that you can find at: www.github.com/pganzon/kuwaderno
+Kuwaderno adds docker and mesos to the configuration that I didn't require.
+
 
 ## Building the Docker image.
 To build the image, clone this repo and run code below.
 ```
-docker build -t kuwaderno .
+docker build -t datascience .
 ```
 
 If you would not like to build this repository you can use the built image on docker hub.
 ```
-docker run  -d -p 8787:8787 -p 7777:7777  -p 8888:8888 paulganzon/kuwaderno
+docker run  -d -p 8787:8787 -p 7777:7777  -p 8888:8888 -p 22:2222 picarus/datascience
 ```
 
 
 ## Using the Docker image
 Using bridge networking
 ```
-docker run  -d -p 8787:8787 -p 7777:7777  -p 8888:8888 kuwaderno
+docker run  -d -p 8787:8787 -p 7777:7777  -p 8888:8888 -p 22:2222 datascience
 ```
 
 or using host networking
@@ -35,6 +38,7 @@ After the execution of the code above the following applications should now be a
 * Rstudio Server  - http://ip.address:8787/
 * Jupyter         - http://ip.address:7777/
 * Apache Zeppelin - http://ip.address:8888/
+* SSH             - http://ip.address:2222/
 
 Default user and password to access the url are as follows:
 * User: admin
@@ -42,11 +46,8 @@ Default user and password to access the url are as follows:
 
 You can change both of the user name and password by using the environment variables NB_USER and NB_USER_PASS. For example, if you want the user to be *user1* and *password1* then run the following:
 ```
-docker run  -d -e NB_USER=user1 -e NB_USER_PASS=password1 --net=host kuwaderno
+docker run  -d -e NB_USER=user1 -e NB_USER_PASS=password1 --net=host datascience
 ```
-
-
-
 
 ### Application Versions
 
@@ -55,34 +56,9 @@ docker run  -d -e NB_USER=user1 -e NB_USER_PASS=password1 --net=host kuwaderno
 | Rstudio Server | 1.0.143|
 | Jupyter        | 4.3.0|
 | Apache Zeppelin| 0.7.1|
-| Apache Spark   | 2.1.0|
-| Apache Mesos   | 1.1.0-2.0.107|
 
 ### R Packages Installed
-1. dplyr
-1. ggplot2
-1. plotly
-1. stringr
-1. lubridate
-1. reshape2
-1. gmodels
-1. httr
-1. BoomSpikeSlab
-1. dygraphs
-1. shiny
-1. RJDBC
-1. markdown
-1. knitr
-1. rmarkdown
-1. devtools
-1. data.table
-1. CausalImpact
+As the list is extense and will change often, rather check the file rpackages.R
 
 ### Python Packages Installed
-1. ipython
-1. jupyter
-1. pandas
-1. requests
-1. plotly
-1. cufflinks
-1. scipy
+As the list is extense and will change often, rather check the file requirements.txt

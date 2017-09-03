@@ -1,7 +1,8 @@
 FROM ubuntu:16.04
-MAINTAINER Paul Ganzon <paul.ganzon@gmail.com>
+LABEL maintainer="jose.a.magana@gmail.com"
+LABEL author="Paul Ganzon <paul.ganzon@gmail.com>"
 
-LABEL "name"="Kuwaderno"
+LABEL "name"="datascience"
 
 USER root
 
@@ -13,16 +14,9 @@ ENV NB_USER_PASS 14mR00t!
 ENV PORT0 8787
 ENV PORT1 7777
 ENV PORT2 8888
-
+ENV PORT3 2222
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-
-# SPARK 
-ENV SPARK_VERSION spark-2.1.0-bin-hadoop2.7
-ENV MESOS_NATIVE_JAVA_LIBRARY /usr/local/lib/libmesos.so
-ENV SPARK_URL http://d3kbcqa49mib13.cloudfront.net/$SPARK_VERSION.tgz
-ENV SPARK_HOME /opt/$SPARK_VERSION
-ENV PYTHONPATH /opt/$SPARK_VERSION/python:/opt/$SPARK_VERSION/python/lib/py4j-0.10.4-src.zip:$PYTHONPATH
 
 # JUPYTER
 ENV NOTEBOOK_HOME /home/$NB_USER
@@ -35,8 +29,6 @@ ENV ZEPPELIN_HOME /opt/$ZEPPELIN_VERSION
 
 # R
 ENV RSTUDIO_URL https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
-
-
 
 # Install
 RUN apt-get update  && \
@@ -66,6 +58,7 @@ RUN  apt-get update && apt-get -y install python \
     libxt-dev \
     libgdal-dev \
     libproj-dev \
+    nano \
     pandoc \
     pandoc-citeproc \
     libssh2-1-dev \
@@ -74,11 +67,9 @@ RUN  apt-get update && apt-get -y install python \
 
 
 # Copy files
-COPY venv.sh entrypoint.sh hosts ansible.cfg build_mesos.yml requirements.txt  /
+COPY venv.sh entrypoint.sh requirements.txt / 
 RUN chmod +x entrypoint.sh venv.sh
-
-RUN ansible-playbook build_mesos.yml
-
+RUN pip install --upgrade pip
 RUN pip install virtualenv
 RUN /venv.sh
 
@@ -93,13 +84,10 @@ RUN Rscript rpackages.R
 RUN wget $RSTUDIO_URL -O rstudioserver.deb
 RUN gdebi -n rstudioserver.deb
 
-
-RUN wget $SPARK_URL
 RUN wget $ZEPPELIN_URL
-RUN tar -xvf $SPARK_VERSION.tgz  -C /opt
 RUN tar -xvf $ZEPPELIN_VERSION.tgz  -C /opt
 
-RUN rm -f venv.sh $SPARK_VERSION.tgz $ZEPPELIN_VERSION.tgz ansible.cfg  build_mesos.yml  hosts  requirements.txt  rpackages.R  rstudioserver.deb
+RUN rm -f venv.sh $ZEPPELIN_VERSION.tgz requirements.txt  rpackages.R  rstudioserver.deb
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["notebook"]
