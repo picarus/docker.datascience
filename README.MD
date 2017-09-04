@@ -12,33 +12,32 @@ docker build -t datascience .
 
 If you would not like to build this repository you can use the built image on docker hub.
 ```
-docker run  -d -p 8787:8787 -p 7777:7777  -p 8888:8888 -p 22:2222 picarus/datascience
+docker run  -d -p 8787:8787 -p 7777:7777  -p 8888:8888 picarus/datascience
 ```
 
 
 ## Using the Docker image
 Using bridge networking
 ```
-docker run  -d -p 8787:8787 -p 7777:7777  -p 8888:8888 -p 22:2222 datascience
+docker run  -d -p 8787:8787 -p 7777:7777  -p 8888:8888 datascience
 ```
 
 or using host networking
 
 
 ```
-docker run  -d --net=host kuwaderno
+docker run  -d --net=host datascience
 ```
 
 If you wish to change the port on host networking you can run the following instead.
 ```
-docker run -d -e PORT0=<rstudio.server.port> -e PORT1=<jupyter.port> -e PORT2=<zeppelin.port> --net=host kuwaderno
+docker run -d -e PORT0=<rstudio.server.port> -e PORT1=<jupyter.port> -e PORT2=<zeppelin.port> --net=host datascience
 ```
 
 After the execution of the code above the following applications should now be accessible.
 * Rstudio Server  - http://ip.address:8787/
 * Jupyter         - http://ip.address:7777/
 * Apache Zeppelin - http://ip.address:8888/
-* SSH             - http://ip.address:2222/
 
 Default user and password to access the url are as follows:
 * User: admin
@@ -55,7 +54,7 @@ docker run  -d -e NB_USER=user1 -e NB_USER_PASS=password1 --net=host datascience
 | ------------- |-------------|
 | Rstudio Server | 1.0.143|
 | Jupyter        | 4.3.0|
-| Apache Zeppelin| 0.7.1|
+| Apache Zeppelin| 0.7.2|
 
 ### R Packages Installed
 As the list is extense and will change often, rather check the file rpackages.R

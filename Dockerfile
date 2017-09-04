@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+	FROM ubuntu:16.04
 LABEL maintainer="jose.a.magana@gmail.com"
 LABEL author="Paul Ganzon <paul.ganzon@gmail.com>"
 
@@ -14,21 +14,12 @@ ENV NB_USER_PASS 14mR00t!
 ENV PORT0 8787
 ENV PORT1 7777
 ENV PORT2 8888
-ENV PORT3 2222
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
 # JUPYTER
 ENV NOTEBOOK_HOME /home/$NB_USER
 
-# ZEPPELIN
-ENV ZEPPELIN_VERSION zeppelin-0.7.1-bin-all
-ENV ZEPPELIN_URL http://apache.mirror.serversaustralia.com.au/zeppelin/zeppelin-0.7.1/$ZEPPELIN_VERSION.tgz
-ENV ZEPPELIN_NOTEBOOK_DIR /root
-ENV ZEPPELIN_HOME /opt/$ZEPPELIN_VERSION
-
-# R
-ENV RSTUDIO_URL https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
 
 # Install
 RUN apt-get update  && \
@@ -73,9 +64,12 @@ RUN pip install --upgrade pip
 RUN pip install virtualenv
 RUN /venv.sh
 
+# R
+ENV RSTUDIO_URL https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
+
 # Install java
-RUN R CMD javareconf
 RUN apt-get -y install r-cran-rjava
+RUN R CMD javareconf
 
 COPY rpackages.R /
 RUN Rscript rpackages.R
@@ -83,11 +77,18 @@ RUN Rscript rpackages.R
 # Install RStudio
 RUN wget $RSTUDIO_URL -O rstudioserver.deb
 RUN gdebi -n rstudioserver.deb
+RUN rm -f rstudioserver.deb
+
+# ZEPPELIN
+ENV ZEPPELIN_VERSION zeppelin-0.7.2-bin-all
+ENV ZEPPELIN_URL http://apache.mirror.serversaustralia.com.au/zeppelin/zeppelin-0.7.2/$ZEPPELIN_VERSION.tgz
+ENV ZEPPELIN_NOTEBOOK_DIR /root
+ENV ZEPPELIN_HOME /opt/$ZEPPELIN_VERSION
 
 RUN wget $ZEPPELIN_URL
 RUN tar -xvf $ZEPPELIN_VERSION.tgz  -C /opt
 
-RUN rm -f venv.sh $ZEPPELIN_VERSION.tgz requirements.txt  rpackages.R  rstudioserver.deb
+RUN rm -f venv.sh $ZEPPELIN_VERSION.tgz requirements.txt  rpackages.R 
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["notebook"]
