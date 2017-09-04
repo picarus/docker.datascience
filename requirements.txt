@@ -5,3 +5,5 @@ requests
 plotly
 cufflinks
 scipy
+tensorflow
+keras
