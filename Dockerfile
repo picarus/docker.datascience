@@ -14,6 +14,7 @@ ENV NB_USER_PASS 14mR00t!
 ENV PORT0 8787
 ENV PORT1 7777
 ENV PORT2 8888
+ENV PORT3 6006
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
@@ -90,8 +91,8 @@ RUN tar -xvf $ZEPPELIN_VERSION.tgz  -C /opt
 
 RUN rm -f venv.sh $ZEPPELIN_VERSION.tgz requirements.txt  rpackages.R 
 
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["notebook"]
 
-ENV PORT3 6006
-CMD ["tensorboard", "--logdir", "/logs"]
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["notebook"]

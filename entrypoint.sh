@@ -20,7 +20,8 @@ if [ "$1" = 'notebook' ]; then
     export JPASSCONF="c.NotebookApp.password = u'$JPASS'"
     jupyter notebook --allow-root --generate-config
     echo "$JPASSCONF" >> ~/.jupyter/jupyter_notebook_config.py
-    jupyter notebook --no-browser --port=$PORT1 --ip=0.0.0.0 --allow-root
+    jupyter notebook --no-browser --port=$PORT1 --ip=0.0.0.0 --allow-root &
+    tensorboard --logdir /logs
 else
    exec "$@"
 fi

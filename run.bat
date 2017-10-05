@@ -1,1 +1,1 @@
-docker run -d -v //alchemy/GithubNet:/home/Github -p 8787:8787 -p 7777:7777 -p 8888:8888 datascience
+docker run -d -v //alchemy/GithubNet:/home/Github -p 8787:8787 -p 7777:7777 -p 8888:8888 -p 6006:6006 picarus/datascience
