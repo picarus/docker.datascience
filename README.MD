@@ -38,6 +38,7 @@ After the execution of the code above the following applications should now be a
 * Rstudio Server  - http://ip.address:8787/
 * Jupyter         - http://ip.address:7777/
 * Apache Zeppelin - http://ip.address:8888/
+* Tensorboard     - http://ip.address:6006/
 
 Default user and password to access the url are as follows:
 * User: admin
@@ -55,9 +56,22 @@ docker run  -d -e NB_USER=user1 -e NB_USER_PASS=password1 --net=host datascience
 | Rstudio Server | 1.0.143|
 | Jupyter        | 4.3.0|
 | Apache Zeppelin| 0.7.2|
+| Tensorflow| |
 
 ### R Packages Installed
 As the list is extense and will change often, rather check the file rpackages.R
 
 ### Python Packages Installed
 As the list is extense and will change often, rather check the file requirements.txt
+
+## Instructions to run from docker
+
+While more comprehensive documentation is put together let's collect some links on how to do it:
+
+* https://docs.docker.com/machine/examples/aws/#step-3-run-docker-commands-on-the-instance
+
+* https://docs.docker.com/machine/reference/env/
+
+* eval "$(docker-machine env default)"
+
+

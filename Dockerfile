@@ -92,3 +92,6 @@ RUN rm -f venv.sh $ZEPPELIN_VERSION.tgz requirements.txt  rpackages.R
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["notebook"]
+
+ENV PORT3 6006
+CMD ["tensorboard", "--logdir", "/logs"]
