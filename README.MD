@@ -1,8 +1,8 @@
 # Docker Data Science
 Docker image containing the following **Data Science** notebooks Jupyter, RStudio and Apache Zeppelin. 
 This docker image is a simplification of **KUWADERNO** by Paul Ganzon, that you can find at: www.github.com/pganzon/kuwaderno
-Kuwaderno adds docker and mesos to the configuration that I didn't require.
-
+Kuwaderno adds spark and mesos to the configuration that I didn't require.
+In exchange I have added tensorflow and keras support.
 
 ## Building the Docker image.
 To build the image, clone this repo and run code below.
