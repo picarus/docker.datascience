@@ -12,6 +12,9 @@ if [ "$1" = 'notebook' ]; then
     echo -e "#"'!'"/bin/bash\nset -e\nexport ZEPPELIN_PORT=$PORT2" > $ZEPPELIN_HOME/conf/zeppelin-env.sh
     $ZEPPELIN_HOME/bin/zeppelin-daemon.sh start &
 
+    mkdir /logs
+    tensorboard --logdir /logs &
+
     source /venv/bin/activate
     mkdir -p $NOTEBOOK_HOME
     cd $NOTEBOOK_HOME
@@ -20,8 +23,8 @@ if [ "$1" = 'notebook' ]; then
     export JPASSCONF="c.NotebookApp.password = u'$JPASS'"
     jupyter notebook --allow-root --generate-config
     echo "$JPASSCONF" >> ~/.jupyter/jupyter_notebook_config.py
-    jupyter notebook --no-browser --port=$PORT1 --ip=0.0.0.0 --allow-root &
-    tensorboard --logdir /logs
+    jupyter notebook --no-browser --port=$PORT1 --ip=0.0.0.0 --allow-root 
+    
 else
    exec "$@"
 fi

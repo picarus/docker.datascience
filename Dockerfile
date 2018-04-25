@@ -66,7 +66,7 @@ RUN pip install virtualenv
 RUN /venv.sh
 
 # R
-ENV RSTUDIO_URL https://download2.rstudio.org/rstudio-server-1.0.143-amd64.deb
+ENV RSTUDIO_URL https://download1.rstudio.org/rstudio-1.1.447-amd64.deb
 
 # Install java
 RUN apt-get -y install r-cran-rjava
