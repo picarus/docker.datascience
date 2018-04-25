@@ -53,7 +53,7 @@ docker run  -d -e NB_USER=user1 -e NB_USER_PASS=password1 --net=host datascience
 
 |Application|Version|
 | ------------- |-------------|
-| Rstudio Server | 1.0.143|
+| Rstudio Server | 1.1.447|
 | Jupyter        | 4.3.0|
 | Apache Zeppelin| 0.7.2|
 | Tensorflow| |
@@ -64,6 +64,12 @@ As the list is extense and will change often, rather check the file rpackages.R
 ### Python Packages Installed
 As the list is extense and will change often, rather check the file requirements.txt
 
+## Docker hub
+
+This docker image is also available from: 
+
+* https://hub.docker.com/r/picarus/datascience/
+
 ## Instructions to run from docker
 
 While more comprehensive documentation is put together let's collect some links on how to do it:
@@ -73,5 +79,15 @@ While more comprehensive documentation is put together let's collect some links 
 * https://docs.docker.com/machine/reference/env/
 
 * eval "$(docker-machine env default)"
+
+## Use from AWS
+
+To upload and register the Docker Image on AWS follow the instructions at: 
+
+* https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#use-ecr
+
+(to be added)
+
+Steps to launch docker image
 
 
