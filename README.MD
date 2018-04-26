@@ -82,6 +82,8 @@ While more comprehensive documentation is put together let's collect some links 
 
 ## Use from AWS
 
+* (Optional?) Get your Dockerhub image locally: docker pull picarus/datascience
+
 To upload and register the Docker Image on AWS follow the instructions at: 
 
 * https://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html#use-ecr
